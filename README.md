@@ -6,7 +6,10 @@ Click desperately the peach in 60 seconds, just that.
 
 ## Platform
 
-Support Windows x64 only.
+- Windows (x32 / x64)
+- Mac OS (Intel)
+- Android
+- iOS
 
 ## Downloads
 
