@@ -34,6 +34,7 @@ jobs:
         with:
           buildName: PeachClicker
           targetPlatform: ${{ matrix.targetPlatform }}
+          versioning: Semantic
       - uses: actions/upload-artifact@v2
         with:
           name: PeachClicker-${{ matrix.targetPlatform }}
