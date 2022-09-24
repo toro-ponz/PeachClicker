@@ -1,43 +1,37 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreBehavior : MonoBehaviour
+namespace Clicker
 {
-    [SerializeField]
-    private Text scoreTextObject;
-
-    [SerializeField]
-    private long score = 0L;
-
-    private bool isFinished = false;
-
-    public void AddScore(int score)
+    public class ScoreBehavior : MonoBehaviour
     {
-        if (this.isFinished) {
-            return;
+        [SerializeField] private Text scoreTextObject;
+
+        [SerializeField] private long totalScore = 0L;
+
+        private bool isFinished = false;
+
+        public void AddScore(int score)
+        {
+            if (this.isFinished)
+            {
+                return;
+            }
+
+            this.totalScore += score;
+            this.scoreTextObject.text = $"SCORE: {this.totalScore}pt";
         }
 
-        this.score += score;
-        this.scoreTextObject.text = String.Format("SCORE: {0}pt", this.score);
-    }
+        public void Restart()
+        {
+            this.isFinished = false;
+            this.totalScore = 0L;
+            this.scoreTextObject.text = $"SCORE: {this.totalScore}pt";
+        }
 
-    public long GetScore()
-    {
-        return this.score;
-    }
-
-    public void Restart()
-    {
-        this.isFinished = false;
-        this.score = 0L;
-        this.scoreTextObject.text = String.Format("SCORE: {0}pt", this.score);
-    }
-
-    public void Finish()
-    {
-        this.isFinished = true;
+        public void Finish()
+        {
+            this.isFinished = true;
+        }
     }
 }

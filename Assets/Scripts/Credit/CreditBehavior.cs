@@ -1,27 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CreditBehavior : MonoBehaviour
+namespace Credit
 {
-    [SerializeField]
-    private GameObject timeGameObject;
-
-    private float countup = 0.0f;
-
-    protected void Update()
+    public class CreditBehavior : MonoBehaviour
     {
-        this.countup += Time.deltaTime;
+        [SerializeField] private GameObject timeGameObject;
 
-        if(this.countup >= 3.5f) {
-            this.StartClicker();
-            return;
+        private float totalFlameTime = 0.0f;
+
+        protected void Update()
+        {
+            this.totalFlameTime += Time.deltaTime;
+
+            if (this.totalFlameTime >= 3.5f)
+            {
+                this.StartClicker();
+            }
         }
-    }
 
-    private void StartClicker()
-    {
-        SceneManager.LoadSceneAsync("Scenes/ClickerScene");
+        private void StartClicker()
+        {
+            SceneManager.LoadSceneAsync("Scenes/ClickerScene");
+        }
     }
 }

@@ -1,76 +1,78 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartBehavior : MonoBehaviour
+namespace Clicker
 {
-    [SerializeField]
-    private GameObject scoreGameObject;
-    [SerializeField]
-    private GameObject timeGameObject;
-
-    [SerializeField]
-    private Button buttonObject;
-
-    protected void Start()
+    public class StartBehavior : MonoBehaviour
     {
-        this.buttonObject.onClick.AddListener(this.OnClick);
-    }
+        [SerializeField] private GameObject scoreGameObject;
+        [SerializeField] private GameObject timeGameObject;
 
-    protected void Update()
-    {
-        if (this.isFinished()) {
-            this.notifyFinish();
-        }
-    }
+        [SerializeField] private Button buttonObject;
 
-    protected void OnClick()
-    {
-        this.restartScore();
-        this.restartTime();
-    }
-
-    private bool isFinished()
-    {
-        return this.getTimeBehavior()?.IsFinished() ?? false;
-    }
-
-    private void notifyFinish()
-    {
-        this.getScoreBehavior()?.Finish();
-    }
-
-    private void restartScore()
-    {
-        this.getScoreBehavior()?.Restart();
-    }
-
-    private void restartTime()
-    {
-        this.getTimeBehavior()?.Begin();
-    }
-
-    private ScoreBehavior? getScoreBehavior()
-    {
-        ScoreBehavior behavior = this.scoreGameObject.GetComponent<ScoreBehavior>();
-
-        if (behavior == null) {
-            Debug.Log("ScoreBehavior is null at StartBehavior.getScoreBehavior().");
+        protected void Start()
+        {
+            this.buttonObject.onClick.AddListener(this.OnClick);
         }
 
-        return behavior;
-    }
-
-    private TimeBehavior? getTimeBehavior()
-    {
-        TimeBehavior behavior = this.timeGameObject.GetComponent<TimeBehavior>();
-
-        if (behavior == null) {
-            Debug.Log("TimeBehavior is null at StartBehavior.getTimeBehavior().");
+        protected void Update()
+        {
+            if (this.IsFinished())
+            {
+                this.NotifyFinish();
+            }
         }
 
-        return behavior;
+        private void OnClick()
+        {
+            this.RestartScore();
+            this.RestartTime();
+        }
+
+        private bool IsFinished()
+        {
+            return this.GetTimeBehavior()?.IsFinished() ?? false;
+        }
+
+        private void NotifyFinish()
+        {
+            this.GetScoreBehavior()?.Finish();
+        }
+
+        private void RestartScore()
+        {
+            this.GetScoreBehavior()?.Restart();
+        }
+
+        private void RestartTime()
+        {
+            this.GetTimeBehavior()?.Begin();
+        }
+
+        private ScoreBehavior GetScoreBehavior()
+        {
+            var behavior = this.scoreGameObject.GetComponent<ScoreBehavior>();
+
+            if (behavior is null)
+            {
+                Debug.Log("ScoreBehavior is null at StartBehavior.GetScoreBehavior().");
+                return null;
+            }
+
+            return behavior;
+        }
+
+        private TimeBehavior GetTimeBehavior()
+        {
+            var behavior = this.timeGameObject.GetComponent<TimeBehavior>();
+
+            if (behavior is null)
+            {
+                Debug.Log("TimeBehavior is null at StartBehavior.GetTimeBehavior().");
+                return null;
+            }
+
+            return behavior;
+        }
     }
 }

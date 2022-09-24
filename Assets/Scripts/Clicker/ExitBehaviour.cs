@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ExitBehaviour : MonoBehaviour
+namespace Clicker
 {
-    [SerializeField]
-    private Button buttonObject;
-
-    protected void Start()
+    public class ExitBehaviour : MonoBehaviour
     {
-        this.buttonObject.onClick.AddListener(this.OnClick);
-    }
+        [SerializeField]
+        private Button buttonObject;
 
-    protected void OnClick()
-    {
-        UnityEngine.Application.Quit();
+        protected void Start()
+        {
+            this.buttonObject.onClick.AddListener(OnClick);
+        }
+
+        private static void OnClick()
+        {
+            Application.Quit();
+        }
     }
 }
