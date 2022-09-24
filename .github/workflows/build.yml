@@ -26,8 +26,10 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: Library
-          key: Library-${{ matrix.targetPlatform }}
-          restore-keys: Library-
+          key: v1-${{ runner.os }}-Library-${{ matrix.targetPlatform }}
+          restore-keys: |
+            v1-${{ runner.os }}-Library-${{ matrix.targetPlatform }}
+            v1-${{ runner.os }}-Library-
       - uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
